@@ -41,7 +41,6 @@ int main(void) {
             stop = false;
         }
         while (go && !stop) {
-//        while (1) {
             if (left)
                 steerLeft();
             if (right)
