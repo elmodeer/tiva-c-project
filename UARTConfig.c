@@ -20,14 +20,10 @@ void UARTConfig(void) {
 	// BRD = 104.16666667
 	UART4_IBRD_R = 104;                           // baud rate of 9600 bit/s
 	UART4_FBRD_R = 10;
-
 	UART4_LCRH_R = 0x60;                         // 8N1    bits frame and no parity bit
-
 	UART4_CTL_R |= 0x221;                        // enable the UART4 as Rx
-
 	UART4_ICR_R = 0xE7FF; //clear all interrupts
 	UART4_IM_R |= 1 << 4; 	// activate UART4 Rx interrupts
-
 	NVIC_EN1_R |= 1<< (57-32); // enable UART2 interrupt in the nested vector interrupt controller
 }
 
