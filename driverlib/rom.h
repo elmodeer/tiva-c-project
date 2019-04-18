@@ -41,6 +41,7 @@
 #define __DRIVERLIB_ROM_H__
 
 #ifndef DEPRECATED
+#define TARGET_IS_TM4C129_RA1
 //*****************************************************************************
 //
 // ROM selection labels changed between TivaWare 2.0.1 and 2.1.  The following

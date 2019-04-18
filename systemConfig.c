@@ -5,6 +5,8 @@ void systemConfig()
 
     timerConfig();
     UARTConfig();
+    UARTConfigGPS();
+    ConfigureUARTSerial();
     configPortM();
     //configPortD();
 }

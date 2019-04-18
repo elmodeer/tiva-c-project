@@ -5,6 +5,11 @@
 #include "tm4c1294ncpdt.h"
 #include "functions.h"
 #include "int_handler.h"
+#include "inc/hw_memmap.h"
+#include "driverlib/uart.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/rom.h"
+#include "driverlib/rom_map.h"
 #include <stdbool.h>
 
 #define PWM_PERIOD  16666
@@ -23,6 +28,7 @@ int pwmServoDelta = 10; // up faster
 int pwmMotorDelta = 90; // up faster
 int i;
 
+
 void systemConfig();
 void SysCtlDelay();
 void steerLeft();
@@ -34,6 +40,16 @@ void delay(int s) {
 
 int main(void) {
 
+    // Run from the PLL at 120 MHz.
+
+//    //Setting up serial port
+//    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+//    while(!MAP_SysCtlPeripheralReady(SYSCTL_PERIPH_UART0))
+//    {//Often goes into fault interrupt if this isn't here
+//    }
+//
+//    MAP_UARTConfigSetExpClk(UART0_BASE, SysCtlClockGet(), 9600 ,(UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_EVEN));
+//    MAP_UARTFIFOEnable(UART0_BASE);
     systemConfig();
     while (1) {
         if (stop) {

@@ -3,6 +3,7 @@
 
 void IntPortLHandler(void);
 void commandRecieved(void);
+void GPSPosition(void);
 
 extern volatile unsigned int gucNewData;
 extern volatile unsigned char gucRxChar;
