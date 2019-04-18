@@ -81,9 +81,9 @@ void ConfigureUARTSerial(void) {
     ROM_GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
     // Initialize the UART for console I/O.
+    // GPS module works with baud rate 9600.
     UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
     UARTStdioConfig(0, 9600, 16000000);
-//    UARTStdioConfig(0, 4800, 25000000);
 }
 // switch the the 25MHZ clock for more precision
 void clock_change(void){
