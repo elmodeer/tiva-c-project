@@ -16,6 +16,7 @@ void commandRecieved(void)
     gucNewData = gucRxChar == 'g' ? go = true :
                      gucRxChar == 's' ? stop = true :
                          gucRxChar == 'r' ? right = true :
-                             gucRxChar == 'l' ? left = true : 30;
+                             gucRxChar == 'l' ? left = true :
+                                  gucRxChar == 'b' ? back = true :   30;
 
 }

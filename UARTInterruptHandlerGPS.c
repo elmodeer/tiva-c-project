@@ -13,7 +13,10 @@ void GPSPosition(void)
     ui32Status = UARTIntStatus(UART6_BASE, true);       //get interrupt status
     UARTIntClear(UART6_BASE, ui32Status);               //clear the asserted interrupts
     gucRxChar = UARTCharGet(UART6_BASE);
+    // prints at serial monitor
     UARTCharPut(UART0_BASE, gucRxChar);
-    // UARTCharPut(UART0_BASE, '\n');
+
+    // prints at mobile
+    UARTCharPut(UART4_BASE, gucRxChar);
 
 }

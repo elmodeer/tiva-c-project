@@ -36,6 +36,7 @@
 // This is part of revision 2.1.4.178 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
+#include <stdbool.h>
 
 #ifndef __DRIVERLIB_TIMER_H__
 #define __DRIVERLIB_TIMER_H__

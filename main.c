@@ -23,6 +23,7 @@ volatile unsigned char left = false;
 volatile unsigned char right = false;
 volatile unsigned char go = false;
 volatile unsigned char stop = false;
+volatile unsigned char back = false;
 
 int pwmServoDelta = 10; // up faster
 int pwmMotorDelta = 90; // up faster
@@ -33,6 +34,7 @@ void systemConfig();
 void SysCtlDelay();
 void steerLeft();
 void steerRight();
+void goBack();
 
 void delay(int s) {
     SysCtlDelay(s * 40000); /*in milliseconds*/
@@ -40,28 +42,20 @@ void delay(int s) {
 
 int main(void) {
 
-    // Run from the PLL at 120 MHz.
-
-//    //Setting up serial port
-//    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-//    while(!MAP_SysCtlPeripheralReady(SYSCTL_PERIPH_UART0))
-//    {//Often goes into fault interrupt if this isn't here
-//    }
-//
-//    MAP_UARTConfigSetExpClk(UART0_BASE, SysCtlClockGet(), 9600 ,(UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_EVEN));
-//    MAP_UARTFIFOEnable(UART0_BASE);
     systemConfig();
     while (1) {
         if (stop) {
             go = false;
             stop = false;
         }
+        if (left)
+            steerLeft();
+        if (right)
+            steerRight();
+// not working at the moment
+//        if(back)
+//            goBack();
         while (go && !stop) {
-            if (left)
-                steerLeft();
-            if (right)
-                steerRight();
-
             pwmServo += pwmMotorDelta;
             if ((pwmServo >= PWM_MAX) || (pwmServo <= PWM_MAX)) {
                 pwmMotorDelta = -pwmMotorDelta;
@@ -76,7 +70,7 @@ int main(void) {
  }
 void steerLeft() {
      left = false;
-     for(i = 0 ; i < 50 ; i ++) {
+     for(i = 0 ; i < 10 ; i++) {
          GPIO_PORTM_DATA_R &= ~0x01 ;
          timerWait(pwmServoDelta);
          GPIO_PORTM_DATA_R |= 0x01;
@@ -86,11 +80,21 @@ void steerLeft() {
 
 void steerRight() {
     right = false;
-    for(i = 0 ; i < 50 ; i ++) {
+    for(i = 0 ; i < 10 ; i++) {
         GPIO_PORTM_DATA_R |= 0x01;
         timerWait(pwmServoDelta);
         GPIO_PORTM_DATA_R &= ~0x01;
         timerWait(PWM_PERIOD - pwmServoDelta);
+    }
+}
+
+void goBack() {
+    back = false;
+    for(i = 0 ; i < 50 ; i ++) {
+        GPIO_PORTM_DATA_R &= ~0x02;
+        timerWait(pwmServo);
+        GPIO_PORTM_DATA_R |= 0x02;
+        timerWait(PWM_PERIOD - pwmServo);
     }
 }
 ////         go right servo

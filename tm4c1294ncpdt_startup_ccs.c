@@ -56,7 +56,6 @@ extern uint32_t __STACK_TOP;
 //
 //*****************************************************************************
 // To be added by user
-
 //*****************************************************************************
 //
 // The vector table.  Note that the proper constructs must be placed on this to
@@ -87,7 +86,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port A
     IntDefaultHandler,                      // GPIO Port B
     IntDefaultHandler,                      // GPIO Port C
-    IntDefaultHandler,                      // GPIO Port D
+    timer3AIntHandler,                      // GPIO Port D
     IntDefaultHandler,                      // GPIO Port E
     IntDefaultHandler,                      // UART0 Rx and Tx
     IntDefaultHandler,                      // UART1 Rx and Tx
@@ -137,7 +136,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // External Bus Interface 0
     IntDefaultHandler,                      // GPIO Port J
     IntDefaultHandler,                      // GPIO Port K
-    IntDefaultHandler,                      // GPIO Port L
+    timer0AIntHandler,                      // GPIO Port L
     IntDefaultHandler,                      // SSI2 Rx and Tx
     IntDefaultHandler,                      // SSI3 Rx and Tx
     IntDefaultHandler,                      // UART3 Rx and Tx

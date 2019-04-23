@@ -1,12 +1,20 @@
 #include "tm4c1294ncpdt.h"
 #include "functions.h"
-void systemConfig()
-{
+void systemConfig() {
 
-    timerConfig();
-    UARTConfig();
+//    timerOAConfig();
+
+    timer1AConfig();
+    timer0AConfig();
+    timer3AConfig();
+
+    UARTConfigBluetooth();
     UARTConfigGPS();
-    ConfigureUARTSerial();
+    UARTConfigSerial();
+
     configPortM();
-    //configPortD();
+    configPortL();
+
+//    frontSensorTrigger();
+//    backSensorTrigger();
 }
