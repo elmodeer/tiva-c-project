@@ -25,11 +25,12 @@ volatile unsigned char go = false;
 volatile unsigned char stop = false;
 volatile unsigned char back = false;
 
-int pwmServoDelta = 10; // up faster
-int pwmMotorDelta = 90; // up faster
+int pwmServoDelta = 10; // increase to go faster
+int pwmMotorDelta = 90; // increase to go faster
 int i;
 
 
+// prototypes
 void systemConfig();
 void SysCtlDelay();
 void steerLeft();
@@ -42,7 +43,9 @@ void delay(int s) {
 
 int main(void) {
 
+    // configure the whole system
     systemConfig();
+
     while (1) {
         if (stop) {
             go = false;
@@ -97,19 +100,3 @@ void goBack() {
         timerWait(PWM_PERIOD - pwmServo);
     }
 }
-////         go right servo
-////         i can be used as position
-//        GPIO_PORTM_DATA_R |= 0x01;
-//        timerWait(PWM_PERIOD - pwmServo);
-//        GPIO_PORTM_DATA_R &= ~0x01;
-//        timerWait(pwmServo);
-
-//        }
-//         go left servo
-//        for(i = 0 ; i < 50 ; i ++){
-//            GPIO_PORTM_DATA_R &= ~0x01 ;
-//            timerWait(pwmServo);
-//            GPIO_PORTM_DATA_R |= 0x01;
-//            timerWait(PWM_PERIOD - pwmServo);
-//        }
-

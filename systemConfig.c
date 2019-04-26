@@ -2,8 +2,6 @@
 #include "functions.h"
 void systemConfig() {
 
-//    timerOAConfig();
-
     timer1AConfig();
     timer0AConfig();
     timer3AConfig();
